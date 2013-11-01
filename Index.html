@@ -38,12 +38,12 @@ function testOauth(){
 			contentType: "application/json; charset=utf-8",
 			
 			success:function (msg) {
-               alert(msg.d);
+               alert(msg.d);},
 			 error: function (xhr, textStatus, errorThrown) {
 				alert(textStatus);
 			}
 
-        }});
+        });
 		
 		function lookup(token){
 			var lookupRequest = {"startsWith":"peter"}

@@ -39,13 +39,12 @@ function testOauth(){
 			
 			success:function (msg) {
                alert(msg.d);
+			 error: function (xhr, textStatus, errorThrown) {
+				alert(textStatus);
+			}
 
         }});
-	
-	//$.post( "https://int-soaext.constellation.com/auth/oauth/v2/token2", tokenRequest);
-
-
-	
+		
 		function lookup(token){
 			var lookupRequest = {"startsWith":"peter"}
 

@@ -20,11 +20,11 @@
 function testOauth(){
  
 	var tokenRequest = {
+			"grant_type": "password",
 			"username": "vamsim",
 			"password": "Mm2@2345",
-			"granttype": "password",
-					"client_id" : "b46b5587-b3be-4c01-95b9-40d9c60aef19",
-					"scope" : "iPadDemo"
+			"scope" : "iPadDemo",
+			"client_id" : "b46b5587-b3be-4c01-95b9-40d9c60aef19"
 		};
 		
 		$.ajax({
@@ -37,8 +37,10 @@ function testOauth(){
 			data: tokenRequest,
 			contentType: "application/json; charset=utf-8",
 			
-			success:function (msg) {
-               alert(msg.d);},
+			success:function (data) {
+             
+			   lookup(data.access_token);
+			   },
 			 error: function (xhr, textStatus, errorThrown) {
 				alert(textStatus);
 			}
@@ -57,7 +59,11 @@ function testOauth(){
 				},
 				data: JSON.stringify(lookupRequest),
 				contentType: "application/json; charset=utf-8",
-				dataType: 'JSON'});
+				dataType: 'JSON',
+				success:function (data) {
+						$('#result').text(JSON.stringify(data))
+				   }
+			   });
 			}
 		}
 </script>
@@ -94,6 +100,9 @@ function testOauth(){
 					<a href="index.html" data-role="button" data-transition="slide" >CANCEL</a>
 				</div>
 			</div>
+			
+			<textarea id="result" style="height:200px">
+			</textarea>
 	
 		
 		</form>

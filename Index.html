@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="ctl00_Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /><meta name="apple-mobile-web-app-title" content="BGE" /><title>
+	Sign In
+</title>    	
+
+
+	<link rel="stylesheet" type="text/css" href="https://secure.bge.com/mobile/Style%20Library/Bge%20Mobile/css/bgemobile.css" />
+	<link rel="stylesheet" href="https://secure.bge.com/mobile/Style%20Library/Bge%20Mobile/css/jquery.mobile.structure-1.3.1.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://secure.bge.com/mobile/Style%20Library/Bge%20Mobile/css/main.css" />
+	
+
+	
+<script type="text/javascript"  src="https://secure.bge.com/mobile/Style%20Library/Bge%20Mobile/js/jquery-191.js"></script>
+<script type="text/javascript"  src="https://secure.bge.com/mobile/Style%20Library/Bge%20Mobile/js/jqmobile-131.js"></script>
+
+<script type="text/javascript">
+
+function testOauth(){
+ 
+	var tokenRequest = {
+			"username": "vamsim",
+			"password": "Mm2@2345",
+			"granttype": "password",
+					"client_id" : "b46b5587-b3be-4c01-95b9-40d9c60aef19",
+					"scope" : "iPadDemo"
+		};
+		
+		$.ajax({
+			url: 'https://int-soaext.constellation.com/auth/oauth/v2/token2',
+			type: 'POST',
+			headers: {
+				"cache-control": "no-cache",
+				"Content-Type": "application/x-www-form-urlencoded"
+			},
+			data: tokenRequest,
+			contentType: "application/json; charset=utf-8",
+			
+			success:function (msg) {
+               alert(msg.d);
+
+        }});
+	
+	//$.post( "https://int-soaext.constellation.com/auth/oauth/v2/token2", tokenRequest);
+
+
+	
+		function lookup(token){
+			var lookupRequest = {"startsWith":"peter"}
+
+			$.ajax({
+				url: 'https://int-soaext.constellation.com/safetyar/EmployeeLookup',
+				type: 'POST',
+				headers: {
+					"cache-control": "no-cache",
+					"Authorization" : "Bearer "+token
+				},
+				data: JSON.stringify(lookupRequest),
+				contentType: "application/json; charset=utf-8",
+				dataType: 'JSON'});
+			}
+		}
+</script>
+
+</head>
+<body>
+ 
+<div data-role="page" id="bge-signin" annonymous='true'>
+
+
+
+
+<div data-role="header" class="bgeheader">
+	<div class="center-wrapper"><div class="logo"></div></div>     
+	
+</div>
+		
+
+<div data-role="content">
+	<h2>MANAGE MY ACCOUNT</h2>
+	<div class="border-container">
+<form id="sign-in-form" data-transition="slide">
+			<input type="text" name="uid" id="bgeuid" placeholder="BGE User ID" value="vamsim" autocapitalize="off">
+			<input type="password" name="pwd" id="bgepwd" placeholder="Password" value="Password1">
+		
+		   <p id="sign-in-error" class="error">Incorrect Userid Password</p>
+			
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					
+					<a href="index.html" onclick="testOauth(); return false;" data-role="button" data-transition="slide" >Sign In</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="index.html" data-role="button" data-transition="slide" >CANCEL</a>
+				</div>
+			</div>
+	
+		
+		</form>
+	</div>
+
+
+</div><!-- end data-role="content" -->
+
+
+</div><!-- /page -->
+</body>
+</html>
